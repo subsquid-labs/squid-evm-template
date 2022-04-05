@@ -1,7 +1,7 @@
 # squid-template
 
 This is a sample [squid](https://subsquid.io) project to demonstrate its structure and conventions.
-It accumulates [Moonsama](https://moonsama.com/) token transfers over the [Moonreaver network](https://moonbeam.network/networks/moonriver/) and serves them via graphql API. 
+It accumulates [Moonsama](https://moonsama.com/) token transfers over the [Moonreaver network](https://moonbeam.network/networks/moonriver/) and serves them via graphql API.
 
 This sample project is worthy of notice, because it showcases the native support for EVM logs of the Subsquid SDK.
 
@@ -92,7 +92,7 @@ Furthermore, it is necessary to decode logs and this is shown in [`src/abis/erc7
 
 Squid tools assume a certain project layout.
 
-* All compiled js files must reside in `lib` and all TypeScript sources in `src`. 
+* All compiled js files must reside in `lib` and all TypeScript sources in `src`.
 The layout of `lib` must reflect `src`.
 * All TypeORM classes must be exported by `src/model/index.ts` (`lib/model` module).
 * Database schema must be defined in `schema.graphql`.

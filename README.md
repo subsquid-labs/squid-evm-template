@@ -1,7 +1,7 @@
 # squid-template
 
 This is a sample [squid](https://subsquid.io) project to demonstrate its structure and conventions.
-It accumulates [Moonsama](https://moonsama.com/) token transfers over the [Moonreaver network](https://moonbeam.network/networks/moonriver/) and serves them via graphql API.
+It accumulates [Moonsama](https://moonsama.com/) token transfers over the [Moonriver network](https://moonbeam.network/networks/moonriver/) and serves them via graphql API.
 
 This sample project is worthy of notice, because it showcases the native support for EVM logs of the Subsquid SDK.
 

@@ -3,7 +3,7 @@ import {
   SubstrateEvmProcessor,
 } from "@subsquid/substrate-evm-processor";
 import { lookupArchive } from "@subsquid/archive-registry";
-import { contract, createContractEntity, getContractEntity } from "./contract";
+import { CHAIN_NODE, contract, createContractEntity, getContractEntity } from "./contract";
 import * as erc721 from "./abi/erc721";
 import { Owner, Token, Transfer } from "./model";
 
@@ -12,7 +12,7 @@ const processor = new SubstrateEvmProcessor("moonriver-substrate");
 processor.setBatchSize(500);
 
 processor.setDataSource({
-  chain: "wss://wss.api.moonriver.moonbeam.network",
+  chain: CHAIN_NODE,
   archive: lookupArchive("moonriver")[0].url,
 });
 

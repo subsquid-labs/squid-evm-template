@@ -2,13 +2,15 @@ import { assertNotNull, Store } from "@subsquid/substrate-evm-processor";
 import { ethers } from "ethers";
 import * as erc721 from "./abi/erc721";
 import { Contract } from "./model";
+ 
+export const CHAIN_NODE = "wss://wss.api.moonriver.moonbeam.network";
 
 export const contract = new ethers.Contract(
   "0xb654611f84a8dc429ba3cb4fda9fad236c505a1a",
   erc721.abi,
-  new ethers.providers.WebSocketProvider(assertNotNull(process.env.CHAIN_NODE))
+  new ethers.providers.WebSocketProvider(CHAIN_NODE)
 );
-
+ 
 export function createContractEntity(): Contract {
   return new Contract({
     id: contract.address,
@@ -17,9 +19,9 @@ export function createContractEntity(): Contract {
     totalSupply: 1000n,
   });
 }
-
+ 
 let contractEntity: Contract | undefined;
-
+ 
 export async function getContractEntity({
   store,
 }: {

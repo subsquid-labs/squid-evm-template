@@ -55,13 +55,12 @@ async function timeout<T>(res: Promise<T>, seconds = 30): Promise<T> {
 }
 
 async function retry<T>(promiseFn: () => Promise<T>, attempts = 3): Promise<T> {
-  for (let i = 0; i < attempts; i++) {
+  for (let i = 0; i < attempts; i+=1) {
     try {
       return await promiseFn();
-    } catch (e) {
-      console.log(e);
+    } catch (err) {
+      console.log(err);
     }
   }
   throw new Error(`Error after ${attempts} attempts`);
 }
-er

@@ -1,44 +1,34 @@
-# squid-template
+# EVM squid template (FireSquid edition)
 
-This is a sample [squid](https://subsquid.io) project to demonstrate its structure and conventions.
-It accumulates [Moonsama](https://moonsama.com/) token transfers over the [Moonriver network](https://moonbeam.network/networks/moonriver/) and serves them via graphql API.
+This is a FireSquid version of the sample [squid](https://subsquid.io) showcasing EVM log indexing for substrate chains with a Frontier EVM pallete, like Astar or Moonbeam. This template indexes [Moonsama](https://moonsama.com/) token transfers over the [Moonriver network](https://moonbeam.network/networks/moonriver/) and serves them via graphql API.
 
-This sample project is worthy of notice, because it showcases the native support for EVM logs of the Subsquid SDK.
-
-For more info consult [FAQ](./FAQ.md).
-
-## Prerequisites
-
-* node 16.x
-* docker
-
-## Quickly running the sample
+## Quickstart
 
 ```bash
 # 1. Install dependencies
 npm ci
 
 # 2. Compile typescript files
-npm run build
+make build
 
-# 3. Start target Postgres database
-docker compose up -d
+# 3. Start target Postgres database and detach
+make up
 
-# 4. Apply database migrations from db/migrations
-npx sqd db create
-npx sqd db migrate
+# 4. Start the processor
+make process
 
-# 5. Now start the processor
-node -r dotenv/config lib/processor.js
-
-# 6. The above command will block the terminal
+# 5. The command above will block the terminal
 #    being busy with fetching the chain data, 
 #    transforming and storing it in the target database.
 #
 #    To start the graphql server open the separate terminal
 #    and run
-npx squid-graphql-server
+make serve
 ```
+
+## Migrate from v5 to FireSquid
+
+To migrate old (v5) Squids to FireSquid, follow the [Migration Guide](https://docs.subsquid.io/docs/guides/migrate-to-fire-squid/)
 
 ## Dev flow
 
@@ -58,35 +48,35 @@ command.
 ### 3. Generate database migration
 
 All database changes are applied through migration files located at `db/migrations`.
-`sqd(1)` tool provides several commands to drive the process.
+`squid-typeorm-migration(1)` tool provides several commands to drive the process.
 It is all [TypeORM](https://typeorm.io/#/migrations) under the hood.
 
 ```bash
 # Connect to database, analyze its state and generate migration to match the target schema.
 # The target schema is derived from entity classes generated earlier.
-npx sqd db create-migration
+# Don't forget to compile your entity classes beforehand!
+npx squid-typeorm-migration generate
 
 # Create template file for custom database changes
-npx sqd db new-migration
+npx squid-typeorm-migration create
 
 # Apply database migrations from `db/migrations`
-npx sqd db migrate
+npx squid-typeorm-migration apply
 
 # Revert the last performed migration
-npx sqd db revert
-
-# DROP DATABASE
-npx sqd db drop
-
-# CREATE DATABASE
-npx sqd db create            
+npx squid-typeorm-migration revert   
 ```
 
-### 4. Import ABI contract and set up interfaces to decode events
+### 4. Import ABI contract and generate interfaces to decode events
 
-In order to be able to process EVM logs, it is necessary to import the respective ABI definition. In the case of this project, this has been done via the [`src/abis/ERC721.json`](src/abis/ERC721.json) file.
+It is necessary to import the respective ABI definition to decode EVM logs. For Moonsama transfers we use the standard ERC721 interface, see [`src/abis/ERC721.json`](src/abis/ERC721.json).
 
-Furthermore, it is necessary to decode logs and this is shown in [`src/abis/erc721.ts`](src/abis/erc721.ts). The `events` dictionary define there maps the event name at the center of this project to the function used to decode it.
+To generate a type-safe facade class to decode EVM logs, use `squid-evm-typegen(1)`:
+
+```bash
+npx squid-evm-typegen --abi src/abi/ERC721.json --output src/abi/erc721.ts
+```
+
 
 ## Project conventions
 

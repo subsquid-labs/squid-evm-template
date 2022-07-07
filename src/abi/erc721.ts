@@ -2,19 +2,19 @@ import * as ethers from "ethers";
 
 export const abi = new ethers.utils.Interface(getJsonAbi());
 
-export interface ApprovalAddressAddressUint256Event {
+export interface Approval0Event {
   owner: string;
   approved: string;
   tokenId: ethers.BigNumber;
 }
 
-export interface ApprovalForAllAddressAddressBoolEvent {
+export interface ApprovalForAll0Event {
   owner: string;
   operator: string;
   approved: boolean;
 }
 
-export interface TransferAddressAddressUint256Event {
+export interface Transfer0Event {
   from: string;
   to: string;
   tokenId: ethers.BigNumber;
@@ -28,7 +28,7 @@ export interface EvmEvent {
 export const events = {
   "Approval(address,address,uint256)":  {
     topic: abi.getEventTopic("Approval(address,address,uint256)"),
-    decode(data: EvmEvent): ApprovalAddressAddressUint256Event {
+    decode(data: EvmEvent): Approval0Event {
       const result = abi.decodeEventLog(
         abi.getEvent("Approval(address,address,uint256)"),
         data.data || "",
@@ -44,7 +44,7 @@ export const events = {
   ,
   "ApprovalForAll(address,address,bool)":  {
     topic: abi.getEventTopic("ApprovalForAll(address,address,bool)"),
-    decode(data: EvmEvent): ApprovalForAllAddressAddressBoolEvent {
+    decode(data: EvmEvent): ApprovalForAll0Event {
       const result = abi.decodeEventLog(
         abi.getEvent("ApprovalForAll(address,address,bool)"),
         data.data || "",
@@ -60,7 +60,7 @@ export const events = {
   ,
   "Transfer(address,address,uint256)":  {
     topic: abi.getEventTopic("Transfer(address,address,uint256)"),
-    decode(data: EvmEvent): TransferAddressAddressUint256Event {
+    decode(data: EvmEvent): Transfer0Event {
       const result = abi.decodeEventLog(
         abi.getEvent("Transfer(address,address,uint256)"),
         data.data || "",

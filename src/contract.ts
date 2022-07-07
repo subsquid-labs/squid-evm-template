@@ -39,7 +39,7 @@ export async function getTokenURI(address: string): Promise<string> {
 
 async function timeout<T>(res: Promise<T>, seconds = 30): Promise<T> {
   return new Promise((resolve, reject) => {
-    let timer: any = setTimeout(() => {
+    let timer: NodeJS.Timeout|undefined = setTimeout(() => {
       timer = undefined;
       reject(new Error(`Request timed out in ${seconds} seconds`));
     }, seconds * 1000);

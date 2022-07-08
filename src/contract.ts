@@ -33,8 +33,8 @@ export async function getContractEntity(store: Store): Promise<Contract> {
   return contractEntity;
 }
 
-export async function getTokenURI(address: string): Promise<string> {
-  return retry(async () => timeout(contract.tokenURI(address)));
+export async function getTokenURI(tokenId: string): Promise<string> {
+  return retry(async () => timeout(contract.tokenURI(tokenId)));
 }
 
 async function timeout<T>(res: Promise<T>, seconds = 30): Promise<T> {

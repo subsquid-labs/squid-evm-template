@@ -8,12 +8,8 @@ import {
   SubstrateBlock,
 } from "@subsquid/substrate-processor";
 import { In } from "typeorm";
-import {
-  CHAIN_NODE,
-  contract,
-  getContractEntity,
-  getTokenURI,
-} from "./contract";
+import { ethers } from "ethers";
+import { CHAIN_NODE, contractAddress, getContractEntity } from "./contract";
 import { Owner, Token, Transfer } from "./model";
 import * as erc721 from "./abi/erc721";
 
@@ -25,7 +21,7 @@ const processor = new SubstrateBatchProcessor()
     archive: lookupArchive("moonriver", { release: "FireSquid" }),
   })
   .setTypesBundle("moonbeam")
-  .addEvmLog(contract.address, {
+  .addEvmLog(contractAddress, {
     filter: [erc721.events["Transfer(address,address,uint256)"].topic],
   });
 
@@ -51,7 +47,7 @@ type TransferData = {
   id: string;
   from: string;
   to: string;
-  token: string;
+  token: ethers.BigNumber;
   timestamp: bigint;
   block: number;
   transactionHash: string;
@@ -68,7 +64,7 @@ function handleTransfer(
 
   const transfer: TransferData = {
     id: event.id,
-    token: tokenId.toString(),
+    token: tokenId,
     from,
     to,
     timestamp: BigInt(block.timestamp),
@@ -84,7 +80,7 @@ async function saveTransfers(ctx: Context, transfersData: TransferData[]) {
   const ownersIds: Set<string> = new Set();
 
   for (const transferData of transfersData) {
-    tokensIds.add(transferData.token);
+    tokensIds.add(transferData.token.toString());
     ownersIds.add(transferData.from);
     ownersIds.add(transferData.to);
   }
@@ -106,6 +102,12 @@ async function saveTransfers(ctx: Context, transfersData: TransferData[]) {
   );
 
   for (const transferData of transfersData) {
+    const contract = new erc721.Contract(
+      ctx,
+      { height: transferData.block },
+      contractAddress
+    );
+
     let from = owners.get(transferData.from);
     if (from == null) {
       from = new Owner({ id: transferData.from, balance: 0n });
@@ -118,11 +120,13 @@ async function saveTransfers(ctx: Context, transfersData: TransferData[]) {
       owners.set(to.id, to);
     }
 
-    let token = tokens.get(transferData.token);
+    const tokenId = transferData.token.toString();
+
+    let token = tokens.get(tokenId);
     if (token == null) {
       token = new Token({
-        id: transferData.token,
-        uri: await getTokenURI(transferData.token),
+        id: tokenId,
+        uri: await contract.tokenURI(transferData.token),
         contract: await getContractEntity(ctx.store),
       });
       tokens.set(token.id, token);

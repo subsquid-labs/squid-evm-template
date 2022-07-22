@@ -1,5 +1,5 @@
 {
-  "name": "kusama-balances",
+  "name": "squid-evm-template",
   "private": true,
   "scripts": {
     "build": "rm -rf lib && tsc",
@@ -10,23 +10,23 @@
   },
   "dependencies": {
     "@ethersproject/abi": "^5.6.1",
-    "@subsquid/archive-registry": "^1.0.3",
+    "@subsquid/archive-registry": "1.0.6",
     "@subsquid/cli": "^0.5.1",
-    "@subsquid/evm-typegen": "^1.0.1",
+    "@subsquid/evm-typegen": "^1.1.0",
     "@subsquid/graphql-server": "^1.1.0",
     "@subsquid/ss58": "^0.1.1",
-    "@subsquid/substrate-processor": "^1.2.0",
-    "@subsquid/typeorm-migration": "^0.1.0",
-    "@subsquid/typeorm-store": "^0.1.0",
+    "@subsquid/substrate-processor": "1.5.0",
+    "@subsquid/typeorm-migration": "0.1.1",
+    "@subsquid/typeorm-store": "0.1.1",
     "dotenv": "^16.0.0",
     "ethers": "^5.6.4",
     "pg": "^8.7.3",
     "typeorm": "^0.3.6"
   },
   "devDependencies": {
-    "@subsquid/substrate-metadata-explorer": "^1.0.3",
-    "@subsquid/substrate-typegen": "^1.0.2",
-    "@subsquid/typeorm-codegen": "^0.0.2",
+    "@subsquid/substrate-metadata-explorer": "1.0.4",
+    "@subsquid/substrate-typegen": "1.2.0",
+    "@subsquid/typeorm-codegen": "0.1.0",
     "@types/node": "^17.0.23",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "eslint": "^7.32.0",

@@ -15,7 +15,7 @@
     "@subsquid/evm-typegen": "^1.1.0",
     "@subsquid/graphql-server": "^1.1.0",
     "@subsquid/ss58": "^0.1.1",
-    "@subsquid/substrate-processor": "1.5.0",
+    "@subsquid/substrate-processor": "1.5.1",
     "@subsquid/typeorm-migration": "0.1.1",
     "@subsquid/typeorm-store": "0.1.1",
     "dotenv": "^16.0.0",

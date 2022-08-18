@@ -12,7 +12,7 @@
     "@ethersproject/abi": "^5.6.1",
     "@subsquid/archive-registry": "1.0.9",
     "@subsquid/cli": "0.6.0",
-    "@subsquid/evm-typegen": "^1.1.0",
+    "@subsquid/evm-typegen": "1.2.0",
     "@subsquid/graphql-server": "^1.1.0",
     "@subsquid/ss58": "^0.1.1",
     "@subsquid/substrate-processor": "1.5.1",

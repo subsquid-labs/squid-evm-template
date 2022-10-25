@@ -1,6 +1,6 @@
-# EVM squid template (FireSquid edition)
+# Gravatar squid
 
-This is a FireSquid version of the sample [squid](https://subsquid.io) showcasing EVM log indexing for substrate chains with a Frontier EVM pallete, like Astar or Moonbeam. This template indexes [Moonsama](https://moonsama.com/) token transfers over the [Moonriver network](https://moonbeam.network/networks/moonriver/) and serves them via graphql API.
+This squid has been migrated from the [Gravatar subgraph](https://github.com/graphprotocol/example-subgraph). For a step-by-step migration guide, see the [migration docs page](https://docs.subsquid.io/migrate/migrate-subgraph/)
 
 ## Quickstart
 
@@ -25,10 +25,6 @@ make process
 #    and run
 make serve
 ```
-
-## Migrate from v5 to FireSquid
-
-To migrate old (v5) Squids to FireSquid, follow the [Migration Guide](https://docs.subsquid.io/docs/guides/migrate-to-fire-squid/)
 
 ## Dev flow
 

@@ -1,5 +1,6 @@
-type MyEntity @entity {
+type Gravatar @entity {
   id: ID!
-  foo: String!
+  owner: Bytes!
+  displayName: String!
+  imageUrl: String!
 }
-

@@ -1,6 +1,11 @@
-# EVM squid template (FireSquid edition)
+# Minimal Ethereum mainnet squid
 
-This is a FireSquid version of the sample [squid](https://subsquid.io) showcasing EVM log indexing for substrate chains with a Frontier EVM pallete, like Astar or Moonbeam. This template indexes [Moonsama](https://moonsama.com/) token transfers over the [Moonriver network](https://moonbeam.network/networks/moonriver/) and serves them via graphql API.
+This is a minimal runnable template of a squid run against an Ethereum mainnet. It does not index any data. To index Ethereum transaction and event data, modify `src/processor.ts` and subscribe to EVM logs and transactions. 
+
+For a step-by-step migration guide from TheGraph, see [the dedicated docs page](https://docs.subsquid.io/migrate/migrate-subgraph/).
+
+For full details on how to transform the data and serve with a GraphQL API, consult [the docs](https://docs.subsquid.io). 
+
 
 ## Quickstart
 
@@ -22,13 +27,9 @@ make process
 #    transforming and storing it in the target database.
 #
 #    To start the graphql server open the separate terminal
-#    and run
+#    and run. The GraphQL playground will be available at localhost:4350graphl
 make serve
 ```
-
-## Migrate from v5 to FireSquid
-
-To migrate old (v5) Squids to FireSquid, follow the [Migration Guide](https://docs.subsquid.io/docs/guides/migrate-to-fire-squid/)
 
 ## Dev flow
 
@@ -69,12 +70,12 @@ npx squid-typeorm-migration revert
 
 ### 4. Import ABI contract and generate interfaces to decode events
 
-It is necessary to import the respective ABI definition to decode EVM logs. For Moonsama transfers we use the standard ERC721 interface, see [`src/abis/ERC721.json`](src/abis/ERC721.json).
+It is necessary to import the respective ABI definition to decode EVM logs. 
 
-To generate a type-safe facade class to decode EVM logs, use `squid-evm-typegen(1)`:
+To generate a type-safe facade class to decode EVM logs, use `squid-evm-typegen(1)`. For example, for a ERC721 contract use
 
 ```bash
-npx squid-evm-typegen --abi src/abi/ERC721.json --output src/abi/erc721.ts
+npx squid-evm-typegen --abi src/abi/ERC721.json --output src/abi/ERC721.ts
 ```
 
 
@@ -89,12 +90,12 @@ The layout of `lib` must reflect `src`.
 * Database migrations must reside in `db/migrations` and must be plain js files.
 * `sqd(1)` and `squid-*(1)` executables consult `.env` file for a number of environment variables.
 
-## Graphql server extensions
+## GraphQL server extensions
 
 It is possible to extend `squid-graphql-server(1)` with custom
-[type-graphql](https://typegraphql.com) resolvers and to add request validation.
-More details will be added later.
+[type-graphql](https://typegraphql.com) resolvers and to add request validation. See [the docs](https://docs.subsquid.io/develop-a-squid/graphql-api/custom-resolvers/) for more details.
+
 
 ## Disclaimer
 
-This is alpha-quality software. Expect some bugs and incompatible changes in coming weeks.
+This is alpha-quality software. The Squid SDK may introduce breaking changes in future versions.

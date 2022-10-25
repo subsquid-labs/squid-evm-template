@@ -1,6 +1,6 @@
 # Gravatar squid
 
-This squid has been migrated from the [Gravatar subgraph](https://github.com/graphprotocol/example-subgraph). For a step-by-step migration guide, see the [migration docs page](https://docs.subsquid.io/migrate/migrate-subgraph/)
+This squid has been migrated from the [Gravatar subgraph](https://github.com/graphprotocol/example-subgraph). For a step-by-step migration guide, see the [migration docs page](https://docs.subsquid.io/migrate/migrate-subgraph/).x
 
 ## Quickstart
 
@@ -22,7 +22,7 @@ make process
 #    transforming and storing it in the target database.
 #
 #    To start the graphql server open the separate terminal
-#    and run
+#    and run. The GraphQL playground will be available at localhost:4350graphl
 make serve
 ```
 
@@ -65,12 +65,12 @@ npx squid-typeorm-migration revert
 
 ### 4. Import ABI contract and generate interfaces to decode events
 
-It is necessary to import the respective ABI definition to decode EVM logs. For Moonsama transfers we use the standard ERC721 interface, see [`src/abis/ERC721.json`](src/abis/ERC721.json).
+It is necessary to import the respective ABI definition to decode EVM logs. 
 
-To generate a type-safe facade class to decode EVM logs, use `squid-evm-typegen(1)`:
+To generate a type-safe facade class to decode EVM logs, use `squid-evm-typegen(1)`. For example, for Gravatar ABI use
 
 ```bash
-npx squid-evm-typegen --abi src/abi/ERC721.json --output src/abi/erc721.ts
+npx squid-evm-typegen --abi src/abi/Gravity.json --output src/abi/Gravity.ts
 ```
 
 
@@ -85,12 +85,12 @@ The layout of `lib` must reflect `src`.
 * Database migrations must reside in `db/migrations` and must be plain js files.
 * `sqd(1)` and `squid-*(1)` executables consult `.env` file for a number of environment variables.
 
-## Graphql server extensions
+## GraphQL server extensions
 
 It is possible to extend `squid-graphql-server(1)` with custom
-[type-graphql](https://typegraphql.com) resolvers and to add request validation.
-More details will be added later.
+[type-graphql](https://typegraphql.com) resolvers and to add request validation. See [the docs](https://docs.subsquid.io/develop-a-squid/graphql-api/custom-resolvers/) for more details.
+
 
 ## Disclaimer
 
-This is alpha-quality software. Expect some bugs and incompatible changes in coming weeks.
+This is alpha-quality software. The Squid SDK may introduce breaking changes in the future versions.

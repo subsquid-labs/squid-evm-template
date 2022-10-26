@@ -4,7 +4,7 @@ import {EvmBatchProcessor} from '@subsquid/evm-processor'
 const processor = new EvmBatchProcessor()
   .setDataSource({
     chain: process.env.ETHEREUM_MAINNET_WSS,
-    archive: 'https://eth-test.archive.subsquid.io',
+    archive: 'https://ethereum-mainnet-beta.archive.subsquid.io',
   })
   .addLog('0x0000000000000000000000000000000000000000', {
     filter: [[ ]],

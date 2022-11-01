@@ -3,7 +3,10 @@ import {EvmBatchProcessor} from '@subsquid/evm-processor'
 
 const processor = new EvmBatchProcessor()
   .setDataSource({
-    chain: process.env.ETHEREUM_MAINNET_WSS,
+    // uncomment and set ETHEREUM_MAINNET_WSS to 
+    // a websocket JSON-RPC Etheruem mainnet endpoint in
+    // order to enable contract state queries:
+    // chain: process.env.ETHEREUM_MAINNET_WSS,
     archive: 'https://eth.archive.subsquid.io',
   })
   .addTransaction([

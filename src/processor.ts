@@ -6,8 +6,11 @@ import { Gravatar } from "./model/generated/gravatar.model";
 
 const processor = new EvmBatchProcessor()
   .setDataSource({
-    chain: process.env.ETHEREUM_MAINNET_WSS,
-    archive: 'https://ethereum-mainnet-beta.archive.subsquid.io',
+    // uncomment and set ETHEREUM_MAINNET_WSS to 
+    // a websocket JSON-RPC Etheruem mainnet endpoint in
+    // order to enable contract state queries:
+    // chain: process.env.ETHEREUM_MAINNET_WSS,
+    archive: 'https://eth.archive.subsquid.io',
   })
   .setBlockRange({ from: 6175243 })
   .addLog('0x2E645469f354BB4F5c8a05B3b30A929361cf77eC', {

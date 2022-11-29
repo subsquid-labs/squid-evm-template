@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "build": "rm -rf lib && tsc",
+    "update": "npx npm-check-updates --filter /subsquid/ --upgrade && npm i -f",
     "db:migrate": "npx squid-typeorm-migration apply",
     "squid-etl:start": "node lib/processor.js",
     "squid-api:start": "squid-graphql-server"
@@ -10,10 +11,10 @@
   "dependencies": {
     "@ethersproject/abi": "^5.6.1",
     "@subsquid/big-decimal": "^0.0.0",
-    "@subsquid/evm-processor": "^0.0.1",
-    "@subsquid/evm-typegen": "1.3.1",
-    "@subsquid/graphql-server": "3.2.3",
-    "@subsquid/typeorm-migration": "0.1.3",
+    "@subsquid/evm-processor": "^0.1.2",
+    "@subsquid/evm-typegen": "2.0.0",
+    "@subsquid/graphql-server": "3.2.4",
+    "@subsquid/typeorm-migration": "0.1.4",
     "@subsquid/typeorm-store": "0.1.5",
     "dotenv": "^16.0.0",
     "ethers": "^5.6.4",
@@ -21,7 +22,7 @@
     "typeorm": "^0.3.6"
   },
   "devDependencies": {
-    "@subsquid/typeorm-codegen": "0.2.3",
+    "@subsquid/typeorm-codegen": "0.3.0",
     "@typechain/ethers-v5": "^10.1.0",
     "@types/node": "^17.0.23",
     "@typescript-eslint/eslint-plugin": "^4.33.0",

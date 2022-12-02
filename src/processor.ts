@@ -17,12 +17,21 @@ const processor = new EvmBatchProcessor()
 
     archive: 'https://eth.archive.subsquid.io',
   })
+<<<<<<< HEAD
   .setBlockRange({ from: 6175243 })
   .addLog('0x2E645469f354BB4F5c8a05B3b30A929361cf77eC', {
     filter: [[
       events['NewGravatar(uint256,address,string,string)'].topic,
       events['UpdatedGravatar(uint256,address,string,string)'].topic,
    ]],
+=======
+  .addTransaction([
+    '0x0000000000000000000000000000000000000000'
+  ], {
+    range: {
+      from: 6_000_000
+    },
+>>>>>>> c723251 (update libs)
     data: {
         evmLog: {
             topics: true,

@@ -33,8 +33,8 @@ EXPOSE 4000
 
 
 FROM squid AS processor
-CMD ["npm", "run", "processor:start"]
+CMD ["npm", "run", "squid-etl:start"]
 
 
 FROM squid AS query-node
-CMD ["npm", "run", "query-node:start"]
+CMD ["npm", "run", "squid-api:start"]

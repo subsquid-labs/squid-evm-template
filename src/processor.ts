@@ -17,21 +17,12 @@ const processor = new EvmBatchProcessor()
 
     archive: 'https://eth.archive.subsquid.io',
   })
-<<<<<<< HEAD
   .setBlockRange({ from: 6175243 })
   .addLog('0x2E645469f354BB4F5c8a05B3b30A929361cf77eC', {
     filter: [[
-      events['NewGravatar(uint256,address,string,string)'].topic,
-      events['UpdatedGravatar(uint256,address,string,string)'].topic,
+      events.NewGravatar.topic,
+      events.UpdatedGravatar.topic,
    ]],
-=======
-  .addTransaction([
-    '0x0000000000000000000000000000000000000000'
-  ], {
-    range: {
-      from: 6_000_000
-    },
->>>>>>> c723251 (update libs)
     data: {
         evmLog: {
             topics: true,
@@ -62,11 +53,11 @@ processor.run(new TypeormDatabase(), async (ctx) => {
 
 
 function extractData(evmLog: any): { id: ethers.BigNumber, owner: string, displayName: string, imageUrl: string} {
-  if (evmLog.topics[0] === events['NewGravatar(uint256,address,string,string)'].topic) {
-    return events['NewGravatar(uint256,address,string,string)'].decode(evmLog)
+  if (evmLog.topics[0] === events.NewGravatar.topic) {
+    return events.NewGravatar.decode(evmLog)
   }
-  if (evmLog.topics[0] === events['UpdatedGravatar(uint256,address,string,string)'].topic) {
-    return events['UpdatedGravatar(uint256,address,string,string)'].decode(evmLog)
+  if (evmLog.topics[0] === events.UpdatedGravatar.topic) {
+    return events.UpdatedGravatar.decode(evmLog)
   }
   throw new Error('Unsupported topic')
 }

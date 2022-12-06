@@ -1,6 +1,6 @@
 # Gravatar squid
 
-This squid has been migrated from the [Gravatar subgraph](https://github.com/graphprotocol/example-subgraph). For a step-by-step migration guide, see the [migration docs page](https://docs.subsquid.io/migrate/migrate-subgraph/).x
+This squid has been migrated from the [Gravatar subgraph](https://github.com/graphprotocol/example-subgraph). For a step-by-step migration guide, see the [migration docs page](https://docs.subsquid.io/migrate/migrate-subgraph/).
 
 ## Quickstart
 
@@ -67,11 +67,12 @@ npx squid-typeorm-migration revert
 
 It is necessary to import the respective ABI definition to decode EVM logs. 
 
-To generate a type-safe facade class to decode EVM logs, use `squid-evm-typegen(1)`. For example, for Gravatar ABI use
+To generate a type-safe facade class to decode EVM logs, use `squid-evm-typegen(1)`. For example, for Gravatar we fetch the public ABI by the address `0x2E645469f354BB4F5c8a05B3b30A929361cf77eC` and tell the `evm-typegen` to use `Gravity` as the base name:
 
 ```bash
-npx squid-evm-typegen --abi src/abi/Gravity.json --output src/abi/Gravity.ts
+npx squid-evm-typegen src/abi 0x2E645469f354BB4F5c8a05B3b30A929361cf77eC#Gravity --clean
 ```
+It generates the files `abi.support.ts`, `Gravity.abi.ts` and `Gravity.ts` in the destination folder `src/abi`.
 
 
 ## Project conventions
@@ -83,7 +84,7 @@ The layout of `lib` must reflect `src`.
 * All TypeORM classes must be exported by `src/model/index.ts` (`lib/model` module).
 * Database schema must be defined in `schema.graphql`.
 * Database migrations must reside in `db/migrations` and must be plain js files.
-* `sqd(1)` and `squid-*(1)` executables consult `.env` file for a number of environment variables.
+* `sqd(1)` and `squid-*(1)` executables consult `.env` file environment variables, in particular, to establish a database connection.
 
 ## GraphQL server extensions
 
@@ -93,4 +94,4 @@ It is possible to extend `squid-graphql-server(1)` with custom
 
 ## Disclaimer
 
-This is alpha-quality software. The Squid SDK may introduce breaking changes in the future versions.
+This is alpha-quality software. The Squid SDK may introduce breaking changes in future versions.

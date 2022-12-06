@@ -1,8 +1,8 @@
 manifestVersion: subsquid.io/v0.1
-name: evm-template
+name: gravatar-squid
 version: 1
 description: |-
-  The very first evm squid from manifest  
+  Indexes the gravatar contract
 build:
 
 deploy:

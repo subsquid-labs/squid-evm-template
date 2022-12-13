@@ -8,9 +8,9 @@ const processor = new EvmBatchProcessor()
     // chain: process.env.RPC_ENDPOINT,
 
     // Change the Archive endpoints for run the squid 
-    // against the other  EVM networks:
-    // Polygon: https://polygon.archive.subsquid.io
-    // Goerli: https://goerli.archive.subsquid.io
+    // against the other EVM networks
+    // For a full list of supported networks and config options
+    // see https://docs.subsquid.io/develop-a-squid/evm-processor/configuration/
 
     archive: 'https://eth.archive.subsquid.io',
   })

@@ -10,7 +10,8 @@ For full details on how to transform the data and serve with a GraphQL API, cons
 ## Quickstart
 
 ```bash
-# 1. Install dependencies
+# 1. Update the Squid SDK and install dependencies
+npm run update
 npm ci
 
 # 2. Compile typescript files

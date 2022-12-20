@@ -1,11 +1,16 @@
-# Minimal Ethereum mainnet squid
+# Minimal EVM squid
 
-This is a minimal runnable template of a squid run against an Ethereum mainnet. It does not index any data. To index Ethereum transaction and event data, modify `src/processor.ts` and subscribe to EVM logs and transactions. 
+This is a minimal runnable template of a squid indexer for an EVM network (Ethereum, Polygon, BSC, etc.). See 
+
+To extract EVM logs and transactions by a topic or a contract address, use `addLog()` and `addTransaction()` methods of `EvmBatchProcessor`, defined in `src/processor.ts`. 
+
+The requested data is transformed in batches by a single handler provided by the `processor.run()` method. 
+
+For a full list of supported networks and config options,
+check the [`EvmBatchProcessor` overview](https://docs.subsquid.io/develop-a-squid/evm-processor/) and the [configuration page](https://docs.subsquid.io/develop-a-squid/evm-processor/configuration/).
+
 
 For a step-by-step migration guide from TheGraph, see [the dedicated docs page](https://docs.subsquid.io/migrate/migrate-subgraph/).
-
-For full details on how to transform the data and serve with a GraphQL API, consult [the docs](https://docs.subsquid.io). 
-
 
 ## Quickstart
 
@@ -70,12 +75,13 @@ See [docs on schema updates](https://docs.subsquid.io/develop-a-squid/schema-fil
 
 It is necessary to import the respective ABI definition to decode EVM logs. 
 
-To generate a type-safe facade class to decode EVM logs, use `squid-evm-typegen(1)`. For example, for a ERC721 contract use
+To generate a type-safe facade class to decode EVM logs, place the ABI in the `assets` folder and use `squid-evm-typegen(1)`, e.g.:
 
 ```bash
-npx squid-evm-typegen --abi src/abi/ERC721.json --output src/abi/ERC721.ts
+npx squid-evm-typegen src/abi assets/ERC721.json#erc721
 ```
 
+For more details about `squid-evm-typegen` read the [docs page](https://docs.subsquid.io/develop-a-squid/typegen/squid-evm-typegen/)
 
 ## Project conventions
 
@@ -94,6 +100,3 @@ It is possible to extend `squid-graphql-server(1)` with custom
 [type-graphql](https://typegraphql.com) resolvers and to add request validation. See [the docs](https://docs.subsquid.io/develop-a-squid/graphql-api/custom-resolvers/) for more details.
 
 
-## Disclaimer
-
-This is alpha-quality software. The Squid SDK may introduce breaking changes in future versions.

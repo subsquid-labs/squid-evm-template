@@ -1,0 +1,51 @@
+{
+  "$schema": "https://subsquid.io/schemas/commands.json",
+  "commands": {
+    "clean": {
+      "description": "delete all build artifacts",
+      "cmd": ["rm", "-rf", "lib"]
+    },
+    "build": {
+      "description": "build the project",
+      "deps": ["clean"],
+      "cmd": ["tsc"]
+    },
+    "up": {
+      "description": "Create database",
+      "cmd": ["docker-compose", "up", "-d"]
+    },
+    "down": {
+      "description": "Drop database",
+      "cmd": ["docker-compose", "down"]
+    },
+    "migrate": {
+      "description": "Apply migrations",
+      "cmd": ["npx", "squid-typeorm-migration", "apply"]
+    },
+    "migration": {
+      "description": "Generate new migration",
+      "deps": ["build"],
+      "cmd": ["npx", "squid-typeorm-migration", "apply"]
+    },
+    "codegen": {
+      "description": "Generate models from schema",
+      "cmd": ["npx", "squid-typeorm-codegen"]
+    },
+    "typegen": {
+      "description": "Generate wrappers for abi files",
+      "cmd": ["squid-evm-typegen", "./src/abi", {"glob": "./abi/*.json"}]
+    },
+    "process": {
+      "description": "Start squid",
+      "cmd": ["node", "--require=dotenv/config", "lib/processor.js"]
+    },
+    "serve": {
+      "description": "Start graphql server",
+      "cmd": ["npx", "squid-graphql-server"]
+    },
+    "bump": {
+      "description": "Bump @subsquid packages",
+      "cmd": ["npx", "npm-check-updates", "--filter=/subsquid/", "--upgrade"]
+    }
+  }
+}

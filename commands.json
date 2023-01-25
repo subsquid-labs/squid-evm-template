@@ -24,7 +24,6 @@
     },
     "migration": {
       "description": "Generate new migration",
-      "deps": ["build"],
       "cmd": ["npx", "squid-typeorm-migration", "apply"]
     },
     "codegen": {
@@ -37,6 +36,7 @@
     },
     "process": {
       "description": "Start squid",
+      "deps": ["migrate"],
       "cmd": ["node", "--require=dotenv/config", "lib/processor.js"]
     },
     "serve": {

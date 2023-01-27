@@ -1,5 +1,6 @@
-import { TypeormDatabase } from "@subsquid/typeorm-store";
+import { TypeormDatabase } from '@subsquid/typeorm-store';
 import {EvmBatchProcessor} from '@subsquid/evm-processor'
+import { lookupArchive } from '@subsquid/archive-registry'
 
 const processor = new EvmBatchProcessor()
   .setDataSource({
@@ -12,7 +13,7 @@ const processor = new EvmBatchProcessor()
     // For a full list of supported networks and config options
     // see https://docs.subsquid.io/develop-a-squid/evm-processor/configuration/
 
-    archive: 'https://eth.archive.subsquid.io',
+    archive: lookupArchive('eth-mainnet'),
   })
   .addTransaction([
     '0x0000000000000000000000000000000000000000'

@@ -1,5 +1,7 @@
-type MyEntity @entity {
+type Burn @entity {
   id: ID!
-  foo: String!
+  block: Int!
+  address: String! @index
+  value: BigInt!
+  txHash: String!
 }
-

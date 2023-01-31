@@ -24,9 +24,11 @@ tasks:
       gp sync-done setup
   - name: DB
     command: |
+      gp sync-await setup
       sqd up
   - name: GraphQL API
     command: |
+      gp sync-await setup
       sqd serve
   - command: |
       gp ports await 4350 
@@ -34,6 +36,7 @@ tasks:
   - name: Squid procesor
     command: |
       gp open src/processor.ts
+      gp sync-await setup
       sqd build
       gp ports await 23798
       sqd process

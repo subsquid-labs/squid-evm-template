@@ -9,3 +9,4 @@ services:
     ports:
       - "${DB_PORT}:5432"
       # command: ["postgres", "-c", "log_statement=all"]
+    shm_size: 1gb

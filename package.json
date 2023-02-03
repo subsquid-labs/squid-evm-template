@@ -17,7 +17,7 @@
     "@subsquid/typeorm-migration": "0.1.4",
     "@subsquid/typeorm-store": "0.2.0",
     "dotenv": "^16.0.0",
-    "ethers": "^5.6.4",
+    "ethers": "^6.0.0",
     "pg": "^8.7.3",
     "typeorm": "^0.3.6"
   },

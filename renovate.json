@@ -15,7 +15,12 @@
         "pin",
         "digest"
       ]
-    }
+    },
+    {
+      "matchPackagePatterns": ["*"],
+      "excludePackagePatterns": ["^@subsquid/"],
+      "enabled": false
+    } 
   ],
   "automerge": true,
   "automergeType": "pr",

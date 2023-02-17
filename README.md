@@ -42,6 +42,7 @@ sqd process
 #    and run
 sqd serve
 ```
+A GraphiQL playground will be available at [localhost:4350/graphql](http://localhost:4350/graphql).
 
 ## Dev flow
 

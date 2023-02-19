@@ -22,7 +22,7 @@
     "typeorm": "0.3.11"
   },
   "devDependencies": {
-    "@subsquid/evm-typegen": "2.0.4",
+    "@subsquid/evm-typegen": "2.1.0",
     "@subsquid/typeorm-codegen": "0.3.3",
     "@typechain/ethers-v5": "^10.1.0",
     "@types/node": "^18.0.0",

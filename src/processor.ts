@@ -33,8 +33,7 @@ const processor = new EvmBatchProcessor()
   });
 
 function formatID(height:any, hash:string) {
-  return `${String(height).padStart(10, '0')}-${hash.slice(3,8)}` 
-
+  return `${String(height).padStart(10, '0')}-${hash}` 
 } 
 
 processor.run(new TypeormDatabase(), async (ctx) => {

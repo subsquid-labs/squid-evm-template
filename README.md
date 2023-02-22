@@ -82,7 +82,7 @@ It is necessary to import the respective ABI definition to decode EVM logs. One 
 sqd typegen
 ```
 
-See more details on the [`squid-evm-typegen` doc page](https://docs.subsquid.io/evm-indexing/squid-evm-typegen)/
+See more details on the [`squid-evm-typegen` doc page](https://docs.subsquid.io/evm-indexing/squid-evm-typegen).
 
 ## Project conventions
 

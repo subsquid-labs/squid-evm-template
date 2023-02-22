@@ -85,4 +85,4 @@ The layout of `lib` must reflect `src`.
 
 ## Disclaimer
 
-This is alpha-quality software. The Squid SDK may introduce breaking changes in future versions.[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/subsquid/squid-evm-template)
+This is alpha-quality software. The Squid SDK may introduce breaking changes in future versions.

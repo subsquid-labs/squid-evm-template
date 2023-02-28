@@ -31,7 +31,7 @@ npm ci
 # 3. Start a Postgres database container and detach
 sqd up
 
-# 4. Start the processor
+# 4. Build and start the processor
 sqd process
 
 # 5. The command above will block the terminal

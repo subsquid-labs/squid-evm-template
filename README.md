@@ -4,9 +4,9 @@
 
 This is a starter template of a squid indexer for EVM networks (Ethereum, Polygon, BSC, etc.). See [Squid SDK docs](https://docs.subsquid.io/) for a complete reference.
 
-To extract EVM logs and transactions by a topic or a contract address, use `EvmBatchProcessor.addLog()` and `EvmBatchProcessor.addTransaction()` methods of `EvmBatchProcessor`, defined in `src/processor.ts`. 
+To extract EVM logs and transactions by a topic or a contract address, use `EvmBatchProcessor.addLog()` and `EvmBatchProcessor.addTransaction()` methods of the `EvmBatchProcessor` instance defined in `src/processor.ts`. 
 
-The requested data is transformed in batches by a single handler provided by the `processor.run()` method. 
+The requested data is transformed in batches by a single handler provided to the `processor.run()` method. 
 
 For a full list of supported networks and config options,
 check the [`EvmBatchProcessor` overview](https://docs.subsquid.io/develop-a-squid/evm-processor/) and the [configuration page](https://docs.subsquid.io/develop-a-squid/evm-processor/configuration/).
@@ -22,7 +22,7 @@ Dependencies: Node.js, Docker.
 npm i -g @subsquid/cli
 
 # 1. Retrieve the template
-sqd init my_squid_name -t frontier-evm
+sqd init my_squid_name -t evm
 cd my_squid_name
 
 # 2. Install dependencies

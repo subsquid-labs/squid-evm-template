@@ -1,5 +1,13 @@
-import {EvmBatchProcessor} from '@subsquid/evm-processor'
 import {lookupArchive} from '@subsquid/archive-registry'
+import {
+    BlockHeader,
+    DataHandlerContext,
+    EvmBatchProcessor,
+    EvmBatchProcessorFields,
+    Log as _Log,
+    Transaction as _Transaction,
+} from '@subsquid/evm-processor'
+import {Store} from '@subsquid/typeorm-store'
 
 export const processor = new EvmBatchProcessor()
     .setDataSource({
@@ -13,7 +21,7 @@ export const processor = new EvmBatchProcessor()
         // see https://docs.subsquid.io/develop-a-squid/evm-processor/configuration/
 
         archive: lookupArchive('eth-mainnet'),
-        chain: 'https://rpc.ankr.com/eth'
+        chain: 'https://rpc.ankr.com/eth',
     })
     .setFinalityConfirmation(10)
     .setFields({
@@ -29,3 +37,9 @@ export const processor = new EvmBatchProcessor()
     .addTransaction({
         to: ['0x0000000000000000000000000000000000000000'],
     })
+
+export type Fields = EvmBatchProcessorFields<typeof processor>
+export type Context = DataHandlerContext<Store, Fields>
+export type Block = BlockHeader<Fields>
+export type Log = _Log<Fields>
+export type Transaction = _Transaction<Fields>

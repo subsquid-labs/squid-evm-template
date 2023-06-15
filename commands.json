@@ -47,12 +47,12 @@
       "process": {
         "description": "Load .env and start the squid processor",
         "deps": ["build", "migration:apply"],
-        "cmd": ["node", "--require=dotenv/config", "lib/processor.js"]
+        "cmd": ["node", "--require=dotenv/config", "lib/main.js"]
       },
       "process:prod": {
         "description": "Start the squid processor",
         "deps": ["migration:apply"],
-        "cmd": ["node", "lib/processor.js"],
+        "cmd": ["node", "lib/main.js"],
         "hidden": true
       },
       "serve": {

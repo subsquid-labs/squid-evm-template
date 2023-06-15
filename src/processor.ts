@@ -11,16 +11,14 @@ import {Store} from '@subsquid/typeorm-store'
 
 export const processor = new EvmBatchProcessor()
     .setDataSource({
-        // uncomment and set RPC_ENDPOONT to enable contract state queries.
-        // Both https and wss endpoints are supported.
-        // chain: process.env.RPC_ENDPOINT,
-
         // Change the Archive endpoints for run the squid
         // against the other EVM networks
         // For a full list of supported networks and config options
-        // see https://docs.subsquid.io/develop-a-squid/evm-processor/configuration/
-
+        // see https://docs.subsquid.io/evm-indexing/
         archive: lookupArchive('eth-mainnet'),
+        
+        // Must be set for RPC ingestion (https://docs.subsquid.io/evm-indexing/evm-processor/)
+        // OR to enable contract state queries (https://docs.subsquid.io/evm-indexing/query-state/)
         chain: 'https://rpc.ankr.com/eth',
     })
     .setFinalityConfirmation(10)

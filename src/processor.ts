@@ -21,7 +21,7 @@ export const processor = new EvmBatchProcessor()
         // OR to enable contract state queries (https://docs.subsquid.io/evm-indexing/query-state/)
         chain: 'https://rpc.ankr.com/eth',
     })
-    .setFinalityConfirmation(10)
+    .setFinalityConfirmation(75)
     .setFields({
         transaction: {
             from: true,

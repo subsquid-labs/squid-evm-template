@@ -2,7 +2,7 @@ import {TypeormDatabase} from '@subsquid/typeorm-store'
 import {Burn} from './model'
 import {processor} from './processor'
 
-processor.run(new TypeormDatabase({supportHotBlocks: true}), async (ctx) => {
+processor.run(new TypeormDatabase(), async (ctx) => {
     const burns: Burn[] = []
     for (let c of ctx.blocks) {
         for (let tx of c.transactions) {

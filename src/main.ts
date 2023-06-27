@@ -25,5 +25,5 @@ processor.run(new TypeormDatabase({supportHotBlocks: true}), async (ctx) => {
     ctx.log.info(`Burned ${burned} Gwei from ${startBlock} to ${endBlock}`)
 
     // upsert batches of entities with batch-optimized ctx.store.save
-    await ctx.store.save(burns)
+    await ctx.store.upsert(burns)
 })

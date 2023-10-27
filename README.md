@@ -4,16 +4,16 @@
 
 This is a starter template of a squid indexer for EVM networks (Ethereum, Polygon, BSC, etc.). See [Squid SDK docs](https://docs.subsquid.io/) for a complete reference.
 
-To extract EVM logs and transactions by a topic or a contract address, use `EvmBatchProcessor.addLog()` and `EvmBatchProcessor.addTransaction()` methods of the `EvmBatchProcessor` instance defined in `src/processor.ts`. 
+To extract EVM logs and transactions by a topic or a contract address, use [`.addLog()`](https://docs.subsquid.io/evm-indexing/configuration/evm-logs/), [`.addTransaction()`](https://docs.subsquid.io/evm-indexing/configuration/transactions/), [`.addTrace()`](https://docs.subsquid.io/evm-indexing/configuration/traces/) or [`.addStateDiff()`](https://docs.subsquid.io/evm-indexing/configuration/state-diffs/) methods of the `EvmBatchProcessor` instance defined in `src/processor.ts`. Select data fields with [`.setFields()`](https://docs.subsquid.io/evm-indexing/configuration/data-selection/).
 
 The requested data is transformed in batches by a single handler provided to the `processor.run()` method. 
 
 For a full list of supported networks and config options,
-check the [`EvmBatchProcessor` overview](https://docs.subsquid.io/develop-a-squid/evm-processor/) and the [configuration page](https://docs.subsquid.io/develop-a-squid/evm-processor/configuration/).
+check the [`EvmBatchProcessor` overview](https://docs.subsquid.io/evm-indexing/evm-processor/) and the [setup section](https://docs.subsquid.io/evm-indexing/configuration/).
 
 For a step-by-step migration guide from TheGraph, see [the dedicated docs page](https://docs.subsquid.io/migrate/migrate-subgraph/).
 
-Dependencies: Node.js, Docker.
+Dependencies: Node.js v16 or newer, Git, Docker.
 
 ## Quickstart
 
@@ -50,7 +50,7 @@ A GraphiQL playground will be available at [localhost:4350/graphql](http://local
 
 Start development by defining the schema of the target database via `schema.graphql`.
 Schema definition consists of regular graphql type declarations annotated with custom directives.
-Full description of `schema.graphql` dialect is available [here](https://docs.subsquid.io/basics/schema-file).
+Full description of `schema.graphql` dialect is available [here](https://docs.subsquid.io/store/postgres/schema-file/).
 
 ### 2. Generate TypeORM classes
 
@@ -72,7 +72,7 @@ sqd up
 ## replace any old schemas with a new one made from the entities
 sqd migration:generate
 ```
-See [docs on database migrations](https://docs.subsquid.io/basics/db-migrations) for more details.
+See [docs on database migrations](https://docs.subsquid.io/store/postgres/db-migrations/) for more details.
 
 ### 4. Import ABI contract and generate interfaces to decode events
 

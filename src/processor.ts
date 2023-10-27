@@ -1,3 +1,4 @@
+import {assertNotNull} from '@subsquid/util-internal'
 import {lookupArchive} from '@subsquid/archive-registry'
 import {
     BlockHeader,
@@ -10,16 +11,17 @@ import {
 
 export const processor = new EvmBatchProcessor()
     .setDataSource({
-        // Change the Archive endpoints for run the squid
-        // against the other EVM networks
-        // For a full list of supported networks and config options
-        // see https://docs.subsquid.io/evm-indexing/
+        // Lookup archive by the network name in Subsquid registry
+        // See https://docs.subsquid.io/evm-indexing/supported-networks/
         archive: lookupArchive('eth-mainnet'),
-
-        // Must be set for RPC ingestion (https://docs.subsquid.io/evm-indexing/evm-processor/)
-        // OR to enable contract state queries (https://docs.subsquid.io/evm-indexing/query-state/)
+        // Chain RPC endpoint is required for
+        //  - indexing unfinalized blocks https://docs.subsquid.io/basics/unfinalized-blocks/
+        //  - querying the contract state https://docs.subsquid.io/evm-indexing/query-state/
         chain: {
-            url: 'https://rpc.ankr.com/eth',
+            // Set the URL via .env for local runs or via secrets when deploying to Subsquid Cloud
+            // https://docs.subsquid.io/deploy-squid/env-variables/
+            url: assertNotNull(process.env.RPC_ETH_HTTP),
+            // More RPC connection options at https://docs.subsquid.io/evm-indexing/configuration/initialization/#set-data-source
             rateLimit: 10
         }
     })
@@ -32,7 +34,7 @@ export const processor = new EvmBatchProcessor()
         },
     })
     .setBlockRange({
-        from: 6_000_000,
+        from: 0,
     })
     .addTransaction({
         to: ['0x0000000000000000000000000000000000000000'],

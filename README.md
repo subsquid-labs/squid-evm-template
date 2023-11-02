@@ -31,18 +31,19 @@ npm ci
 # 3. Start a Postgres database container and detach
 sqd up
 
-# 4. Build and start the processor
-sqd process
+# 4. Build the squid
+sqd build
 
-# 5. The command above will block the terminal
-#    being busy with fetching the chain data, 
-#    transforming and storing it in the target database.
-#
-#    To start the graphql server open the separate terminal
-#    and run
-sqd serve
+# 5. Start both the squid processor and the GraphQL server
+sqd run .
 ```
 A GraphiQL playground will be available at [localhost:4350/graphql](http://localhost:4350/graphql).
+
+You can also start squid services one by one:
+```bash
+sqd process
+sqd serve
+```
 
 ## Dev flow
 

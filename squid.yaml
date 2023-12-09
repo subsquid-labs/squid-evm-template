@@ -6,8 +6,9 @@ description: |-
 build:
 
 deploy:
-  secrets:
-    - RPC_ENDPOINT
+  env:
+    # Replace it with your secret or other string value
+    RPC_ENDPOINT: ${{ secrets.RPC_ENDPOINT }}
   addons:
     postgres:
   processor:

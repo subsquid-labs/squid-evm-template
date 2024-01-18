@@ -5,6 +5,7 @@
     "build": "rm -rf lib && tsc"
   },
   "dependencies": {
+    "@belopash/mock-store": "^0.0.0",
     "@subsquid/evm-processor": "^1.13.0",
     "dotenv": "^16.3.1"
   },

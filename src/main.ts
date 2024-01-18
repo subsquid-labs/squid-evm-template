@@ -1,29 +1,37 @@
-import {TypeormDatabase} from '@subsquid/typeorm-store'
-import {Burn} from './model'
+import {
+    HotDatabaseState,
+    HotDatabase,
+    FinalTxInfo,
+    HotTxInfo,
+    HashAndHeight,
+} from '@subsquid/util-internal-processor-tools'
 import {processor} from './processor'
 
-processor.run(new TypeormDatabase({supportHotBlocks: true}), async (ctx) => {
-    const burns: Burn[] = []
+class MockDatabase implements HotDatabase<unknown> {
+    readonly supportsHotBlocks = true
+
+    async connect(): Promise<HotDatabaseState> {
+        return {height: -1, hash: '0x', top: []}
+    }
+
+    async transact(info: FinalTxInfo, cb: (store: unknown) => Promise<void>): Promise<void> {
+        return await cb(null)
+    }
+
+    async transactHot(info: HotTxInfo, cb: (store: unknown, block: HashAndHeight) => Promise<void>): Promise<void> {
+        for (let b of info.newBlocks) {
+            await cb(null, b)
+        }
+    }
+}
+
+processor.run(new MockDatabase(), async (ctx) => {
     for (let c of ctx.blocks) {
         for (let tx of c.transactions) {
-            // decode and normalize the tx data
-            burns.push(
-                new Burn({
-                    id: tx.id,
-                    block: c.header.height,
-                    address: tx.from,
-                    value: tx.value,
-                    txHash: tx.hash,
-                })
+            ctx.log.info(
+                {id: tx.id, block: c.header.height, address: tx.from, value: tx.value, txHash: tx.hash},
+                `Burn`
             )
         }
     }
-    // apply vectorized transformations and aggregations
-    const burned = burns.reduce((acc, b) => acc + b.value, 0n) / 1_000_000_000n
-    const startBlock = ctx.blocks.at(0)?.header.height
-    const endBlock = ctx.blocks.at(-1)?.header.height
-    ctx.log.info(`Burned ${burned} Gwei from ${startBlock} to ${endBlock}`)
-
-    // upsert batches of entities with batch-optimized ctx.store.save
-    await ctx.store.upsert(burns)
 })

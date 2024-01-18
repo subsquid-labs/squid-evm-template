@@ -1,5 +1,3 @@
-import {assertNotNull} from '@subsquid/util-internal'
-import {lookupArchive} from '@subsquid/archive-registry'
 import {
     BlockHeader,
     DataHandlerContext,
@@ -7,12 +5,13 @@ import {
     EvmBatchProcessorFields,
     Log as _Log,
     Transaction as _Transaction,
+    assertNotNull,
 } from '@subsquid/evm-processor'
 
 export const processor = new EvmBatchProcessor()
     // Lookup archive by the network name in Subsquid registry
     // See https://docs.subsquid.io/evm-indexing/supported-networks/
-    .setGateway(lookupArchive('eth-mainnet'))
+    .setGateway(assertNotNull(process.env.GATEWAY))
     // Chain RPC endpoint is required for
     //  - indexing unfinalized blocks https://docs.subsquid.io/basics/unfinalized-blocks/
     //  - querying the contract state https://docs.subsquid.io/evm-indexing/query-state/
@@ -21,7 +20,7 @@ export const processor = new EvmBatchProcessor()
         // https://docs.subsquid.io/deploy-squid/env-variables/
         url: assertNotNull(process.env.RPC_ENDPOINT),
         // More RPC connection options at https://docs.subsquid.io/evm-indexing/configuration/initialization/#set-data-source
-        rateLimit: 10
+        rateLimit: 10,
     })
     .setFinalityConfirmation(75)
     .setFields({

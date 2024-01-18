@@ -1,7 +1,0 @@
-type Burn @entity {
-  id: ID!
-  block: Int!
-  address: String! @index
-  value: BigInt!
-  txHash: String!
-}

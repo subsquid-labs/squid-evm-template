@@ -48,6 +48,10 @@ const database = new TypeormDatabase({supportHotBlocks: true})
 const log = createLogger('sqd:processor')
 
 // run() drives the processing loop, passing each batch of data to the handler.
+// Reading on-chain contract state (token balances, totalSupply, prices, …) during indexing
+// means constructing an RpcClient and calling the squid-evm-typegen Contract classes — the
+// Portal handler has no built-in chain access. How-to:
+// https://docs.sqd.dev/en/sdk/squid-sdk/evm/reference/evm-typegen/direct-rpc-queries
 run(dataSource, database, async (ctx) => {
     // augmentBlock() enriches raw block items with ids and navigation helpers.
     const blocks = ctx.blocks.map(augmentBlock)

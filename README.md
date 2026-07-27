@@ -6,14 +6,14 @@ This is a starter template of a squid indexer for EVM networks (Ethereum, Polygo
 
 **Documentation:** [docs.sqd.dev](https://docs.sqd.dev) | [sqd.dev](https://sqd.dev)
 
-To extract EVM logs and transactions by a topic or a contract address, use [`.addLog()`](https://docs.sqd.dev/en/sdk/squid-sdk/reference/processors/evm-batch/logs), [`.addTransaction()`](https://docs.sqd.dev/en/sdk/squid-sdk/reference/processors/evm-batch/transactions), [`.addTrace()`](https://docs.sqd.dev/en/sdk/squid-sdk/reference/processors/evm-batch/traces) or [`.addStateDiff()`](https://docs.sqd.dev/en/sdk/squid-sdk/reference/processors/evm-batch/state-diffs) methods of the `EvmBatchProcessor` instance defined in `src/processor.ts`. Select data fields with [`.setFields()`](https://docs.sqd.dev/en/sdk/squid-sdk/reference/processors/evm-batch/field-selection).
+The data source streams pre-filtered data from a public [SQD Network Portal](https://docs.sqd.dev/en/sdk/squid-sdk/evm/reference/evm-stream) dataset — no API key or RPC endpoint is required, and it covers real-time unfinalized blocks. To extract EVM logs and transactions by a topic or a contract address, use [`.addLog()`](https://docs.sqd.dev/en/sdk/squid-sdk/evm/reference/evm-stream/logs), [`.addTransaction()`](https://docs.sqd.dev/en/sdk/squid-sdk/evm/reference/evm-stream/transactions), [`.addTrace()`](https://docs.sqd.dev/en/sdk/squid-sdk/evm/reference/evm-stream/traces) or [`.addStateDiff()`](https://docs.sqd.dev/en/sdk/squid-sdk/evm/reference/evm-stream/state-diffs) methods of the `DataSourceBuilder` defined in `src/main.ts`. Select data fields with [`.setFields()`](https://docs.sqd.dev/en/sdk/squid-sdk/evm/reference/evm-stream/field-selection).
 
-The requested data is transformed in batches by a single handler provided to the `processor.run()` method. 
+The requested data is transformed in batches by a single handler provided to the [`run()`](https://docs.sqd.dev/en/sdk/squid-sdk/evm/reference/batch-processor) function.
 
 For a full list of supported networks and config options,
-check the [`EvmBatchProcessor` overview](https://docs.sqd.dev/en/sdk/squid-sdk/reference/processors/evm-batch/general) and the [setup section](https://docs.sqd.dev/en/sdk/squid-sdk/reference/processors/evm-batch/general).
+check the [EVM Portal stream overview](https://docs.sqd.dev/en/sdk/squid-sdk/evm/reference/evm-stream).
 
-For a step-by-step migration guide from TheGraph, see [the dedicated docs page](https://docs.sqd.dev/en/sdk/squid-sdk/resources/migrate/migrate-subgraph).
+For a step-by-step migration guide from TheGraph, see [the dedicated docs page](https://docs.sqd.dev/en/sdk/squid-sdk/evm/guides/migration/migrate-from-thegraph).
 
 Dependencies: Node.js 20 or newer, Git, Docker.
 
@@ -53,7 +53,7 @@ sqd serve
 
 Start development by defining the schema of the target database via `schema.graphql`.
 Schema definition consists of regular graphql type declarations annotated with custom directives.
-Full description of `schema.graphql` dialect is available [here](https://docs.sqd.dev/en/sdk/squid-sdk/reference/schema-file/intro).
+Full description of `schema.graphql` dialect is available [here](https://docs.sqd.dev/en/sdk/squid-sdk/evm/reference/schema-files/schema-files-codegen).
 
 ### 2. Generate TypeORM classes
 
@@ -75,7 +75,7 @@ sqd up
 ## replace any old schemas with a new one made from the entities
 sqd migration:generate
 ```
-See [docs on database migrations](https://docs.sqd.dev/en/sdk/squid-sdk/resources/tools/migrations-gen) for more details.
+See [docs on database migrations](https://docs.sqd.dev/en/sdk/squid-sdk/evm/reference/typeorm-migration) for more details.
 
 ### 4. Import ABI contract and generate interfaces to decode events
 
@@ -85,11 +85,11 @@ It is necessary to import the respective ABI definition to decode EVM logs. One 
 sqd typegen
 ```
 
-See more details on the [`squid-evm-typegen` doc page](https://docs.sqd.dev/en/sdk/squid-sdk/resources/tools/typegen/generation).
+See more details on the [`squid-evm-typegen` doc page](https://docs.sqd.dev/en/sdk/squid-sdk/evm/reference/evm-typegen/generating-utility-modules).
 
 ## Project conventions
 
-Squid tools assume a certain [project layout](https://docs.sqd.dev/en/sdk/squid-sdk/how-to-start/layout):
+Squid tools assume a certain [project layout](https://docs.sqd.dev/en/sdk/squid-sdk/evm/reference/project-structure):
 
 * All compiled js files must reside in `lib` and all TypeScript sources in `src`.
 The layout of `lib` must reflect `src`.

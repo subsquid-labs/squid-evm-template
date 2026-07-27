@@ -12,12 +12,12 @@ const dataSource = new DataSourceBuilder()
     // blocks — far faster than a plain RPC endpoint.
     // Browse the available datasets at https://docs.sqd.ai/subsquid-network/reference/networks/
     .setPortal('https://portal.sqd.dev/datasets/ethereum-mainnet')
-    // To use a private or rate-limit-lifted Portal, supply an API key as a Bearer token
+    // To use a private or rate-limit-lifted Portal, supply an API key
     // through the HTTP client headers (create a key at https://portal.sqd.dev/app):
     // .setPortal({
     //     url: 'https://portal.sqd.dev/datasets/ethereum-mainnet',
     //     http: {
-    //         headers: {Authorization: `Bearer ${process.env.SQD_API_KEY}`},
+    //         headers: {'x-api-key': process.env.SQD_API_KEY},
     //     },
     // })
     .setBlockRange({from: 0})
